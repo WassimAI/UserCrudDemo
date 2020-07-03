@@ -1,0 +1,42 @@
+[
+    {
+      "picture": "https://randomuser.me/api/portraits/men/1",
+      "email": "one@one.com",
+      "country": "Sweden",
+      "city": "Chesterfield",
+      "lastActive": "2016-01-12T05:13:38 -04:00",
+      "password": "pass"
+    },
+    {
+      "picture": "https://randomuser.me/api/portraits/men/2",
+      "email": "two@two.com",
+      "country": "Turkmenistan",
+      "city": "Swartzville",
+      "lastActive": "2016-01-22T03:12:27 -04:00",
+      "password": "pass"
+    },
+    {
+      "picture": "https://randomuser.me/api/portraits/men/3",
+      "email": "three@three.com",
+      "country": "Nepal",
+      "city": "Welch",
+      "lastActive": "2019-11-10T04:40:56 -04:00",
+      "password": "pass"
+    },
+    {
+      "picture": "https://randomuser.me/api/portraits/men/4",
+      "email": "four@four.com",
+      "country": "Dominican Republic",
+      "city": "Beyerville",
+      "lastActive": "2016-02-07T06:43:18 -04:00",
+      "password": "pass"
+    },
+    {
+      "picture": "https://randomuser.me/api/portraits/men/5",
+      "email": "five@five.com",
+      "country": "Central African Republic",
+      "city": "Norfolk",
+      "lastActive": "2014-08-01T12:55:22 -04:00",
+      "password": "pass"
+    }
+  ]
