@@ -1,0 +1,14 @@
+.card-img-top:hover {
+    transform: scale(1.2,1.2);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+    opacity: .7;
+}
+
+.card-img-top {
+    transition: all .5s ease-out;
+}
+
+.img-wrapper {
+    overflow: hidden;
+}
