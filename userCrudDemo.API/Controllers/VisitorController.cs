@@ -23,6 +23,7 @@ namespace userCrudDemo.API.Controllers
 
         public async Task<IActionResult> GetAll()
         {
+            //throw new System.Exception("The Shit has hit the fan");
             var visitors = await _repo.GetAll();
             var listToReturn = _mapper.Map<IEnumerable<VisitorForListDto>>(visitors);
 
