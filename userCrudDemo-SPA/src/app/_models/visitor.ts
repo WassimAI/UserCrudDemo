@@ -5,4 +5,5 @@ export interface Visitor {
     city: string;
     lastActive: Date;
     imageUrl: string;
+    password: string;
 }

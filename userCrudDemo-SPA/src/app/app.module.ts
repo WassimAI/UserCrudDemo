@@ -4,9 +4,12 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
+import { FormsModule} from '@angular/forms';
 
-//Services
+// Services
 import { VisitorService } from './_services/visitor.service';
+import { AuthService } from './_services/auth.service';
+import { AlertifyService } from './_services/alertify.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
 import { AppComponent } from './app.component';
@@ -16,6 +19,7 @@ import { VisitorListComponent } from './visitor/visitor-list/visitor-list.compon
 import { VisitorCardComponent } from './visitor/visitor-card/visitor-card.component';
 import { VisitorDetailsComponent } from './visitor/visitor-details/visitor-details.component';
 import { NavComponent } from './nav/nav.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -24,15 +28,17 @@ import { NavComponent } from './nav/nav.component';
     VisitorListComponent,
     VisitorCardComponent,
     VisitorDetailsComponent,
-    NavComponent
+    NavComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [VisitorService, ErrorInterceptorProvider],
+  providers: [VisitorService, AuthService, AlertifyService, ErrorInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

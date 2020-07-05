@@ -29,7 +29,8 @@ namespace userCrudDemo.API
                 }
                 catch (Exception ex)
                 {
-
+                    var logger = Services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occured during migration");
                 }
             }
 
