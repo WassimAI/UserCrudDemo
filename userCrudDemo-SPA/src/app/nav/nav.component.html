@@ -23,14 +23,20 @@
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </li>
-        <li class="nav-item">
+        <li *ngIf="!loggedIn()" class="nav-item">
           <a class="nav-link" [routerLink]="['/register']" >Sign Up</a>
         </li>
+        <li *ngIf="loggedIn()" class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']" (click)="logout()" >Logout</a>
+        </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" name="email" type="email" placeholder="email here">
-        <input class="form-control mr-sm-2" type="password" name="password" placeholder="password here">
+      <form *ngIf="!loggedIn()" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+        <input class="form-control mr-sm-2" name="email" type="email" placeholder="email here" [(ngModel)]="visitor.email">
+        <input class="form-control mr-sm-2" type="password" name="password" placeholder="password here" [(ngModel)]="visitor.password">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Login</button>
       </form>
+      <div *ngIf="loggedIn()">
+        <p class="text-light">Welcome {{authService.decodedToken?.unique_name | titlecase}}</p>
+      </div>
     </div>
   </nav>

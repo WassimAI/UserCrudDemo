@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { FormsModule} from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
 
 // Services
 import { VisitorService } from './_services/visitor.service';
@@ -20,6 +21,11 @@ import { VisitorCardComponent } from './visitor/visitor-card/visitor-card.compon
 import { VisitorDetailsComponent } from './visitor/visitor-details/visitor-details.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -29,14 +35,22 @@ import { RegisterComponent } from './auth/register/register.component';
     VisitorCardComponent,
     VisitorDetailsComponent,
     NavComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    JwtModule.forRoot({
+      config: {
+         tokenGetter: tokenGetter,
+         whitelistedDomains: ['localhost:5000'],
+         blacklistedRoutes: ['localhost:5000/api/auth']
+      }
+   })
   ],
   providers: [VisitorService, AuthService, AlertifyService, ErrorInterceptorProvider],
   bootstrap: [AppComponent]

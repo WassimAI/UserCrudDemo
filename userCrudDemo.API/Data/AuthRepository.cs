@@ -13,9 +13,19 @@ namespace userCrudDemo.API.Data
             _context = context;
 
         }
-        public Task<Visitor> Login(string email, string password)
+        public async Task<Visitor> Login(string email, string password)
         {
-            throw new System.NotImplementedException();
+            var visitor = await _context.Visitors.FirstOrDefaultAsync(x=>x.Email==email);
+
+            if(visitor == null)
+                return null;
+            
+            if(!VerifyPasswordHash(password, visitor.PasswordHash, visitor.PasswordSalt))
+            {
+                return null;
+            }
+
+            return visitor;
         }
 
         public async Task<Visitor> Register(Visitor visitor, string password)
@@ -51,6 +61,20 @@ namespace userCrudDemo.API.Data
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }            
+        }
+
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using(var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                for(int i=0; i<computedHash.Length; i++)
+                {
+                    if(computedHash[i]!=passwordHash[i]) return false;
+                }
+            }
+
+            return true;
         }
     }
 }
