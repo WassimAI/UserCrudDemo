@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { Visitor } from '../_models/visitor';
 
 @Injectable()
 export class VisitorService {
@@ -9,8 +11,12 @@ export class VisitorService {
 
     constructor(private http: HttpClient) { }
 
-    getAll(){
-        return this.http.get(this.baserUrl + 'visitor');
+    getAll(): Observable<Visitor[]>{
+        return this.http.get<Visitor[]>(this.baserUrl + 'visitor');
+    }
+
+    getVisitor(id: number): Observable<Visitor>{
+        return this.http.get<Visitor>(this.baserUrl + 'visitor/' + id);
     }
 
 }

@@ -1,0 +1,10 @@
+.img-wrapper {
+    padding: 5px;
+}
+
+.visitor-detail-img{
+    width: 350px;
+    height: 300px;
+    border: 3px solid black;
+    box-shadow: 0 5px 10px rgba(0,0,0,.4);
+}

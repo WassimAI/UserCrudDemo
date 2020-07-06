@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using userCrudDemo.API.Data;
 using userCrudDemo.API.Dtos;
@@ -9,6 +10,7 @@ namespace userCrudDemo.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class VisitorController : ControllerBase
     {
         private readonly IVisitors _repo;

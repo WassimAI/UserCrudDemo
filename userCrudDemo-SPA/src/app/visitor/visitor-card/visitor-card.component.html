@@ -2,9 +2,11 @@
     <div class="img-wrapper">
         <img src="{{visitor.imageUrl}}" class="card-img-top" alt="{{visitor.email}}">
     </div>
-    <div class="card-body">
+    <div class="card-body text-center">
     <h5 class="card-title">{{visitor.city}}</h5>
     <p class="card-text">{{visitor.country}}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="text-center">
+        <a class="btn btn-primary" [routerLink]="['/visitor/', visitor.id]">Check Details</a>
+    </div>
     </div>
 </div>

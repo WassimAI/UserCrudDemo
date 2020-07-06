@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { VisitorService } from 'src/app/_services/visitor.service';
+import { ActivatedRoute } from '@angular/router';
+import { Visitor } from '../../_models/visitor';
+import { AlertifyService } from 'src/app/_services/alertify.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-visitor-details',
@@ -7,9 +12,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisitorDetailsComponent implements OnInit {
 
-  constructor() { }
+  visitor: Visitor;
+  modalRef: BsModalRef;
+
+  constructor(private visitorService: VisitorService, private route: ActivatedRoute, private alertify: AlertifyService, private modalService: BsModalService) { }
 
   ngOnInit(): void {
+    this.route.data.subscribe(data => {
+      this.visitor = data['visitor'];
+    });
   }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
 
 }

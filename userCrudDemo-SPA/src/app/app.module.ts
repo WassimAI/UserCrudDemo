@@ -6,12 +6,18 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { FormsModule} from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 
 // Services
 import { VisitorService } from './_services/visitor.service';
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { AuthGuard } from './_guards/auth.guard';
+import { VisitorDetailResolver } from './_resolvers/visitor-details.resolver';
+import { VisitorListResolver } from './_resolvers/visitor-list.resolver';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -50,9 +56,12 @@ export function tokenGetter() {
          whitelistedDomains: ['localhost:5000'],
          blacklistedRoutes: ['localhost:5000/api/auth']
       }
-   })
+   }),
+   BsDropdownModule.forRoot(),
+   ModalModule.forRoot()
   ],
-  providers: [VisitorService, AuthService, AlertifyService, ErrorInterceptorProvider],
+  providers: [VisitorService, AuthService, AlertifyService, ErrorInterceptorProvider,
+    AuthGuard, VisitorDetailResolver, VisitorListResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
