@@ -12,17 +12,6 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/visitor']" >Visitors</a>
         </li>
-        <li class="nav-item dropdown" dropdown>
-          <a class="nav-link dropdown-toggle" dropdownToggle id="navbarDropdown" role="button">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown" *dropdownMenu>
-            <a class="dropdown-item" href="#">My Profile</a>
-            <a class="dropdown-item" href="#">Play Games</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Send a free email</a>
-          </div>
-        </li>
         <li *ngIf="!loggedIn()" class="nav-item">
           <a class="nav-link" [routerLink]="['/register']" >Sign Up</a>
         </li>
@@ -36,7 +25,17 @@
         <button class="btn btn-secondary my-2 my-sm-0" type="submit" [disabled]="!loginForm.valid">Login</button>
       </form>
       <div *ngIf="loggedIn()">
-        <p class="text-light">Welcome {{authService.decodedToken?.unique_name}}</p>
+        <div class="nav-item dropdown" dropdown>
+          <a class="nav-link dropdown-toggle" dropdownToggle id="navbarDropdown" role="button">
+            Welcome {{authService.decodedToken?.unique_name}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" *dropdownMenu>
+            <a class="dropdown-item" [routerLink]="['/profile/edit']" >My Profile</a>
+            <a class="dropdown-item" href="#">Play Games</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Send a free email</a>
+          </div>
       </div>
     </div>
-  </nav>
+</div>
+</nav>

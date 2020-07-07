@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 col-lg-6 col-sm-12">
+            <div class="img-wrapper text-center">
+                <img src="{{visitor.imageUrl}}" alt="{{visitor.email}}" class="visitor-detail-img">
+            </div>
+            <div class="mt-5 text-center">
+                <button class="btn btn-success" form="editForm" [disabled]="!editForm.dirty">Save Changes</button>
+            </div>
+        </div>
+        <div class="col-md-8 col-lg-6 col-sm-12">
+            <div class="alert alert-info" *ngIf="editForm.dirty">You have made some changes, make sure to save them before leaving the page</div>
+            <form id="editForm" #editForm="ngForm" (ngSubmit)="updateVisitor()">
+                <h4>Edit Data for | {{visitor.email}}</h4>
+                <hr>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" name="country" [(ngModel)]="visitor.country">
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" name="city" [(ngModel)]="visitor.city">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

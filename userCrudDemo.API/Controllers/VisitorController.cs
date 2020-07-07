@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -39,6 +40,25 @@ namespace userCrudDemo.API.Controllers
             var visitorToReturn = _mapper.Map<VisitorForListDto>(visitor);
             //throw new System.Exception("NO!");
             return Ok(visitorToReturn);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateVisitor(int id, VisitorForUpdateDto visitorForUpdateDto)
+        {
+            if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            var visitorFromRepo = await _repo.GetVisitor(id);
+            _mapper.Map(visitorForUpdateDto, visitorFromRepo);
+            
+            if(await _repo.SaveAll())
+            {
+                return NoContent();
+            }
+
+            throw new System.Exception("Problem While updating data");
         }
     }
 }

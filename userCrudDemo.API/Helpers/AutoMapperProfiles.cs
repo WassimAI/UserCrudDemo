@@ -9,6 +9,7 @@ namespace userCrudDemo.API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<Visitor, VisitorForListDto>();
+            CreateMap<VisitorForUpdateDto, Visitor>();
         }
     }
 }

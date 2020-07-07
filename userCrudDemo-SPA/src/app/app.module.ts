@@ -18,6 +18,7 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AuthGuard } from './_guards/auth.guard';
 import { VisitorDetailResolver } from './_resolvers/visitor-details.resolver';
 import { VisitorListResolver } from './_resolvers/visitor-list.resolver';
+import { VisitorEditResolver } from './_resolvers/visitor-edit.resolver';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +29,7 @@ import { VisitorDetailsComponent } from './visitor/visitor-details/visitor-detai
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
+import { VisitorEditComponent } from './visitor/visitor-edit/visitor-edit.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -42,7 +44,8 @@ export function tokenGetter() {
     VisitorDetailsComponent,
     NavComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    VisitorEditComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,7 @@ export function tokenGetter() {
    ModalModule.forRoot()
   ],
   providers: [VisitorService, AuthService, AlertifyService, ErrorInterceptorProvider,
-    AuthGuard, VisitorDetailResolver, VisitorListResolver],
+    AuthGuard, VisitorDetailResolver, VisitorListResolver, VisitorEditResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

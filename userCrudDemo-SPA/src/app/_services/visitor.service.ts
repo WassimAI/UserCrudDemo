@@ -19,4 +19,8 @@ export class VisitorService {
         return this.http.get<Visitor>(this.baserUrl + 'visitor/' + id);
     }
 
+    updateVisitor(id: number, visitor: Visitor) {
+        return this.http.put(this.baserUrl + 'visitor/' + id, visitor);
+    }
+
 }
