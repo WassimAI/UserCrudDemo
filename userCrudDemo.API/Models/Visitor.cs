@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace userCrudDemo.API.Models
 {
@@ -12,5 +13,6 @@ namespace userCrudDemo.API.Models
         public string City { get; set; }
         public DateTime LastActive { get; set; }
         public string ImageUrl { get; set; }
+        public ICollection<Photo> Photos { get; set; }
     }
 }

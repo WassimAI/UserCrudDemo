@@ -40,6 +40,7 @@ namespace userCrudDemo.API
             services.AddScoped<IVisitors, VisitorsRepository>();
             services.AddScoped<IAuth, AuthRepository>();
             services.AddDbContext<DataContext>( x=> x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(Startup));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => { 
                 options.TokenValidationParameters = new TokenValidationParameters

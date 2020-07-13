@@ -8,6 +8,7 @@ namespace userCrudDemo.API.Data
     {
          Task<IEnumerable<Visitor>> GetAll();
          Task<Visitor> GetVisitor(int id);
+         Task<Photo> GetPhoto(int id);
          Task<bool> SaveAll();
     }
 }

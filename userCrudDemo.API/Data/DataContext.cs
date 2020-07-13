@@ -7,5 +7,6 @@ namespace userCrudDemo.API.Data
     {
         public DataContext(DbContextOptions<DataContext> options):base(options){ }
         public DbSet<Visitor> Visitors { get; set; }
+        public DbSet<Photo> Photos { get; set; }
     }
 }
