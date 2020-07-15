@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { AuthService } from 'src/app/_services/auth.service';
 import { environment } from 'src/environments/environment';
@@ -13,6 +13,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 export class PhotoEditorComponent implements OnInit {
 
   @Input() imageUrl: string;
+  @Output() changeImageUrl = new EventEmitter<string>();
 
   uploader: FileUploader;
   hasBaseDropZoneOver: false;
@@ -53,7 +54,7 @@ export class PhotoEditorComponent implements OnInit {
         };
         this.imageUrl = photo.url;
         this.alertify.success('Photo Changed Successfully!');
-        location.reload();
+        this.changeImageUrl.emit(photo.url);
       }
     };
   }

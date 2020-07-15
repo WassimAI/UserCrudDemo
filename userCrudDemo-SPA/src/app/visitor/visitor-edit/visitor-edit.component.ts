@@ -35,4 +35,8 @@ export class VisitorEditComponent implements OnInit {
 
   }
 
+  changePhoto(imageUrl) {
+    this.visitor.imageUrl = imageUrl;
+  }
+
 }
