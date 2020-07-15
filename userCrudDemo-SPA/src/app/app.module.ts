@@ -8,6 +8,7 @@ import { FormsModule} from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 // Services
@@ -30,6 +31,7 @@ import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { VisitorEditComponent } from './visitor/visitor-edit/visitor-edit.component';
+import { PhotoEditorComponent } from './visitor/photo-editor/photo-editor.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -45,13 +47,15 @@ export function tokenGetter() {
     NavComponent,
     RegisterComponent,
     LoginComponent,
-    VisitorEditComponent
+    VisitorEditComponent,
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    FileUploadModule,
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({
       config: {

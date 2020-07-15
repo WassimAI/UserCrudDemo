@@ -74,7 +74,7 @@ namespace userCrudDemo.API.Controllers
                     var uploadParam = new ImageUploadParams()
                     {
                         File = new FileDescription(file.Name, stream),
-                        Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
+                        Transformation = new Transformation().Width(250).Height(250).Crop("fill").Gravity("face")
                     };
 
                     uploadResult = _cloudinary.Upload(uploadParam);
@@ -92,6 +92,7 @@ namespace userCrudDemo.API.Controllers
             }
 
             visitorFromRepo.Photos.Add(photo);//Getting error here
+            visitorFromRepo.ImageUrl = photo.Url;
 
             if(await _repo.SaveAll())
             {
