@@ -1,11 +1,18 @@
 <div class="container mt-2">
-    <div class="row">
-        <div class="text-center">
-            <h3>Register Here</h3>
-            <hr>
+    <div class="row" *ngIf="loggedIn()">
+        <div class="col"></div>
+        <div class="col-md-6">
+            <div class="p-3 text-center">
+                <h3>Welcome to our visitors app!</h3>
+                <hr>
+                <h4> You can browse and check our visitors, even join them!</h4>
+                <p class="lead">Start checking our visitors first:</p>
+                <p><button class="btn btn-primary btn-block" [routerLink]="['/visitor']" routerLinkActive="router-link-active" >See all Visitors</button></p>
+            </div>
         </div>
+        <div class="col"></div>
     </div>
-    <div class="row">
+    <div *ngIf="!loggedIn()" class="row">
         <div class="col"></div>
         <div class="col-sm-12 col-md-6">
             <form [formGroup]="registerForm">
@@ -35,20 +42,24 @@
                     <div *ngIf="registerForm.hasError('mismatch')" class="invalid-feedback">Passwords Must Match</div>
                 </div>
 
+                <div class="form-group">
+                    <label>Country</label>
+                    <input type="text" class="form-control" formControlName="country"
+                    [ngClass]="{'is-invalid': registerForm.get('country').errors && registerForm.get('country').touched}">
+                    <div *ngIf="registerForm.get('country').hasError('required')" class="invalid-feedback">Country is required</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>City</label>
+                    <input type="text" class="form-control" formControlName="city"
+                    [ngClass]="{'is-invalid': registerForm.get('city').errors && registerForm.get('city').touched}">
+                    <div *ngIf="registerForm.get('city').hasError('required')" class="invalid-feedback">City is required</div>
+                  </div>
+
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-block" [disabled]='!registerForm.valid' (click)="register()">Register</button>
                 </div>                
               </form>
-        </div>
-        <div class="col"></div>
-    </div>
-    <div class="row mt-3">
-        <div class="col"></div>
-        <div class="col-sm-12 col-md-6">
-            Data Analysis
-            <hr>
-            <p>Form Status: {{registerForm.valid | json}}</p>
-            <p>Form Status: {{registerForm.value | json}}</p>
         </div>
         <div class="col"></div>
     </div>

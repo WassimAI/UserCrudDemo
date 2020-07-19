@@ -12,12 +12,6 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/visitor']" >Visitors</a>
         </li>
-        <li *ngIf="!loggedIn()" class="nav-item">
-          <a class="nav-link" [routerLink]="['/register']" >Sign Up</a>
-        </li>
-        <li *ngIf="loggedIn()" class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']" (click)="logout()" >Logout</a>
-        </li>
       </ul>
       <form #loginForm="ngForm" *ngIf="!loggedIn()" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
         <input class="form-control mr-sm-2" name="email" required type="email" placeholder="email here" [(ngModel)]="visitor.email">
@@ -34,6 +28,8 @@
             <a class="dropdown-item" href="#">Play Games</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Send a free email</a>
+            <div class="dropdown-divider"></div>
+            <a *ngIf="loggedIn()" class="dropdown-item" [routerLink]="['/login']" (click)="logout()" >Logout</a>
           </div>
       </div>
     </div>

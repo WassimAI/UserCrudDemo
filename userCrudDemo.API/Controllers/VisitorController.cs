@@ -33,7 +33,7 @@ namespace userCrudDemo.API.Controllers
             return Ok(listToReturn);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name="GetVisitor")]
         public async Task<IActionResult> GetVisitor(int id)
         {
             var visitor = await _repo.GetVisitor(id);

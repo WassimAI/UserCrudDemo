@@ -37,17 +37,19 @@ namespace userCrudDemo.API.Controllers
                 return BadRequest("User already exists");
             }
 
-            var visitorToCreate = new Visitor
-            {
-                Email = visitorForRegisterDto.Email,
-                Country = visitorForRegisterDto.Country,
-                City = visitorForRegisterDto.City,
-                LastActive = DateTime.Now
-            };
+            var visitorToCreate = _mapper.Map<Visitor>(visitorForRegisterDto);
+
+            // var visitorToCreate = new Visitor
+            // {
+            //     Email = visitorForRegisterDto.Email,
+            //     Country = visitorForRegisterDto.Country,
+            //     City = visitorForRegisterDto.City
+            // };
 
             var createdVisitor = await _repo.Register(visitorToCreate, visitorForRegisterDto.Password);
+            var visitorToReturn = _mapper.Map<VisitorForListDto>(createdVisitor);
 
-            return StatusCode(201);
+            return CreatedAtRoute("GetVisitor", new {Controller="Visitor", id= createdVisitor.Id}, visitorToReturn);
         }
 
         [HttpPost("login")]

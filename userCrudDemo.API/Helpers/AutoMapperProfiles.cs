@@ -13,6 +13,7 @@ namespace userCrudDemo.API.Helpers
             CreateMap<VisitorForUpdateDto, Visitor>();
             CreateMap<Photo, PhotoForReturnDto>();//Source then destination!
             CreateMap<PhotoForCreationDto, Photo>();
+            CreateMap<VisitorForRegisterDto, Visitor>();
         }
     }
 }
