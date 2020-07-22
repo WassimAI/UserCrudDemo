@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using userCrudDemo.API.Data;
 using userCrudDemo.API.Dtos;
+using userCrudDemo.API.Helpers;
 
 namespace userCrudDemo.API.Controllers
 {
@@ -24,11 +25,17 @@ namespace userCrudDemo.API.Controllers
             _repo = repo;
         }
 
-        public async Task<IActionResult> GetAll()
+        [HttpGet]
+        public async Task<IActionResult> GetAll([FromQuery]VisitorParams visitorParams)
         {
-            //throw new System.Exception("The Shit has hit the fan");
-            var visitors = await _repo.GetAll();
+            //Get loggedin Id
+            var currentVisitorId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var currentVisitor = await _repo.GetVisitor(currentVisitorId);
+            visitorParams.UserId = currentVisitorId;
+
+            var visitors = await _repo.GetAll(visitorParams);
             var listToReturn = _mapper.Map<IEnumerable<VisitorForListDto>>(visitors);
+            Response.AddPagination(visitors.CurrentPage, visitors.PageSize, visitors.TotalCount, visitors.TotalPages);
 
             return Ok(listToReturn);
         }

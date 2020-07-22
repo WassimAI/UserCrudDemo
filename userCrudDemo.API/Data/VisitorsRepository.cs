@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using userCrudDemo.API.Helpers;
 using userCrudDemo.API.Models;
 
 namespace userCrudDemo.API.Data
@@ -13,11 +15,37 @@ namespace userCrudDemo.API.Data
             _context = context;
 
         }
-        public async Task<IEnumerable<Visitor>> GetAll()
+        public async Task<PagedList<Visitor>> GetAll(VisitorParams visitorParams)
         {
-            var visitors = await _context.Visitors.Include(x=>x.Photos).ToListAsync();
+            var visitors = _context.Visitors.Include(x=>x.Photos).OrderByDescending(x=>x.LastActive).AsQueryable();
+
+            //Removing the loggedIn visitor from list:
+            visitors = visitors.Where(x=>x.Id != visitorParams.UserId);
+
+            if(!string.IsNullOrEmpty(visitorParams.EmailText))
+            {
+                visitors = visitors.Where(x=>x.Email.Contains(visitorParams.EmailText));
+            }
+
+            if(!string.IsNullOrEmpty(visitorParams.NameText))
+            {
+                visitors = visitors.Where(x=>x.Email.Contains(visitorParams.NameText));
+            }
+
+            if(!string.IsNullOrEmpty(visitorParams.OrderBy))
+            {
+                switch (visitorParams.OrderBy)
+                {
+                    case "asc":
+                    visitors = visitors.OrderBy(x=>x.LastActive);
+                    break;
+                    default:
+                    visitors = visitors.OrderByDescending(x=>x.LastActive);
+                    break;
+                }
+            }
             
-            return visitors;
+            return await PagedList<Visitor>.CreateAsync(visitors, visitorParams.PageNumber, visitorParams.PageSize);
         }
 
         public async Task<Visitor> GetVisitor(int id)

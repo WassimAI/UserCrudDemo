@@ -7,9 +7,24 @@
             <button class="btn btn-primary">Show Users</button>
         </div>
     </div>
+    <div class="col">
+      </div>
     <div class="row mt-3">
         <div class="col-lg-4 col-md-6 col-sm-12 mb-2" *ngFor="let v of visitors">
             <app-visitor-card [visitor]="v"></app-visitor-card>
         </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col"></div>
+        <div class="col">
+            <div class="text-center">
+                <pagination
+                [totalItems]="pagination.totalItems"
+                [itemsPerPage]="pagination.itemsPerPage"
+                [(ngModel)]="pagination.currentPage"
+                (pageChanged)="pageChanged($event)"></pagination>
+            </div>
+        </div>
+        <div class="col"></div>
     </div>
 </div>

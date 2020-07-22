@@ -9,6 +9,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FileUploadModule } from 'ng2-file-upload';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 // Services
@@ -66,7 +67,8 @@ export function tokenGetter() {
       }
    }),
    BsDropdownModule.forRoot(),
-   ModalModule.forRoot()
+   ModalModule.forRoot(),
+   PaginationModule.forRoot()
   ],
   providers: [VisitorService, AuthService, AlertifyService, ErrorInterceptorProvider,
     AuthGuard, VisitorDetailResolver, VisitorListResolver, VisitorEditResolver],
